@@ -1,0 +1,59 @@
+import 'package:first_app/main.dart';
+import 'package:flutter/material.dart';
+
+class DrawerDemo extends StatelessWidget {
+  const DrawerDemo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home Screen"),
+        backgroundColor: Colors.deepPurpleAccent,
+        centerTitle: true,
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              accountName: Text("Chirag"),
+              accountEmail: Text("chiragraja70@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS85yUYPwvnD9PPh2uNf_-HdtF6jqOv0RDImg&s"),
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            const Divider(height: 1.0),
+            ListTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              },
+              leading: const Icon(Icons.home),
+              title: const Text("Home"),
+            ),
+            const Divider(height: 1.0),
+            const SizedBox(
+              height: 20.0,
+            ),
+            const Divider(height: 1.0),
+            ListTile(
+              onTap: () {},
+              leading: const Icon(Icons.shopping_bag),
+              title: const Text("Order"),
+            ),
+            const Divider(height: 1.0),
+          ],
+        ),
+      ),
+    );
+  }
+}

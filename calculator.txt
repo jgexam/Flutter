@@ -1,0 +1,107 @@
+import 'package:flutter/material.dart';
+
+class CalculatorScreen extends StatefulWidget {
+  const CalculatorScreen({super.key});
+
+  @override
+  _CalculatorScreenState createState() => _CalculatorScreenState();
+}
+
+class _CalculatorScreenState extends State<CalculatorScreen> {
+  double num1 = 0;
+  double num2 = 0;
+  String result = '';
+  final TextEditingController _num1 = TextEditingController();
+  final TextEditingController _num2 = TextEditingController();
+
+  void addition() {
+    setState(() {
+      result = (num1 + num2).toString();
+    });
+  }
+
+  void subtraction() {
+    setState(() {
+      result = (num1 - num2).toString();
+    });
+  }
+
+  void multiplication() {
+    setState(() {
+      result = (num1 * num2).toString();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Calculator"),
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _num1,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  hintText: "Enter number 1: ",
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    num1 = double.parse(value);
+                  });
+                },
+              ),
+              const SizedBox(height: 30.0),
+              TextField(
+                controller: _num2,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  hintText: "Enter number 2: ",
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    num2 = double.parse(value);
+                  });
+                },
+              ),
+              const SizedBox(height: 30.0),
+              Text("Result: $result"),
+              const SizedBox(height: 50.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: addition,
+                    child: const Text("+"),
+                  ),
+                  ElevatedButton(
+                    onPressed: subtraction,
+                    child: const Text("-"),
+                  ),
+                  ElevatedButton(
+                    onPressed: multiplication,
+                    child: const Text("x"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _num1.clear();
+                      _num2.clear();
+                      setState(() {
+                        result = '';
+                      });
+                    },
+                    child: const Text("Clear"),
+                  ),
+                ],
+              )
+            ],
+          )),
+    );
+  }
+}

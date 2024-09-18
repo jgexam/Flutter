@@ -1,0 +1,56 @@
+import 'package:first_app/cancelled_orders.dart';
+import 'package:first_app/ongoing_orders.dart';
+import 'package:first_app/success_orders.dart';
+import 'package:flutter/material.dart';
+
+class OrderScreen extends StatefulWidget {
+  const OrderScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _OrderScreen();
+}
+
+class _OrderScreen extends State<OrderScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(
+              labelColor: Colors.black,
+              dividerColor: Colors.transparent,
+              indicatorColor: Colors.black,
+              tabs: [
+                Tab(
+                  icon: Icon(
+                    Icons.shop,
+                  ),
+                  text: "Ongoing Orders",
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.done,
+                  ),
+                  text: "Success Orders",
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.cancel,
+                  ),
+                  text: "Cancelled Orders",
+                ),
+              ]),
+          title: const Text("Orders"),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+        ),
+        body: const TabBarView(children: [
+          OngoingOrders(),
+          SuccessOrders(),
+          CancelledOrders(),
+        ]),
+      ),
+    );
+  }
+}
